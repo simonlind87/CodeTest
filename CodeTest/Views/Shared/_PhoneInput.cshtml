@@ -1,0 +1,28 @@
+﻿@model PhoneNumber;
+
+
+@*
+    Simple control featuring an input group with a text input and a prepended control.
+    The "oninput" event triggers the lookupCountryCode function. See "site.js" for further info.
+    This could be done via an eventhandler instead to avoid having to pass the id of the input field to the function. 
+*@
+<div class="row align-items-end">
+
+    <div class="col-2">
+        <label>@Model.Type.ToString():</label>
+    </div>
+    <div class="input-group col-9">
+
+
+        <div class="input-group-prepend col-3">
+            <span class="input-group-text p-inherit" id="country-control-for-phone-@Model.Type.ToString().ToLower()">
+                <i class="fas fa-phone"></i>
+            </span>
+        </div>
+        <input type="tel" id="phone-@Model.Type.ToString().ToLower()" class="form-control col-8" placeholder="+4512345678" aria-label="Phone number" oninput="lookupCountryCode(this.id)">
+
+    </div>
+    <div id="phone-@Model.Type.ToString().ToLower()-error-box" class="col-12 text-danger text-center"></div>
+
+
+</div>
