@@ -10,16 +10,23 @@ function lookupCountryCode(inputElementId) {
     const input = element.value;
     const outputElement = document.getElementById("country-control-for-" + inputElementId);
 
-    if (validateInput(input)) {
-        lookupCountryAsync(input, outputElement);
-        element.classList.remove("is-invalid");
-        document.getElementById(inputElementId + "-error-box").innerHTML = "";
+    if (element.value) {
+        if (validateInput(input)) {
+            lookupCountryAsync(input, outputElement);
+            element.classList.remove("is-invalid");
+            document.getElementById(inputElementId + "-error-box").innerHTML = "";
+        }
+        else {
+            outputElement.innerHTML = '<i class="fas fa-question"></i>';
+            outputElement.title = "Unknown number";
+            element.classList.add("is-invalid");
+            document.getElementById(inputElementId + "-error-box").innerHTML = "Format: +4598765432";
+        }
     }
     else {
-        outputElement.innerHTML = '<i class="fas fa-question"></i>';
-        outputElement.title = "Unknown number";
-        element.classList.add("is-invalid");
-        document.getElementById(inputElementId + "-error-box").innerHTML = "Format: +4598765432";
+        outputElement.innerHTML = '<i class="fas fa-phone"></i>';
+        element.classList.remove("is-invalid");
+        document.getElementById(inputElementId + "-error-box").innerHTML = "";
     }
 }
 
